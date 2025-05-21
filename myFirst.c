@@ -1,4 +1,4 @@
-#include <stdio.sh>
+#include <stdio.h>
 int main () {
 int age = 18;
 printf("Assalamualaikum \n I am Adnan \n");

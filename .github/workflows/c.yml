@@ -29,8 +29,13 @@ jobs:
             echo "Compiled $file -> $exe"
           done
 
-      # Optional: Run executables (if each .c file can be run directly)
-      # - name: Run all executables
-      #   run: |
-      #     for exe in $(find . -type f -executable ! -name '*.c'); do
-      #       echo "Running
+      - name: Run all executables and show output
+        run: |
+          for file in $(find . -name '*.c'); do
+            exe="${file%.c}"
+            if [ -f "$exe" ] && [ -x "$exe" ]; then
+              echo "----- Running $exe -----"
+              "./$exe"
+              echo "-----------------------"
+            fi
+          done

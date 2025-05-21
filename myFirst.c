@@ -6,6 +6,6 @@ int x,y,z;
 printf("Assalamualaikum \n I am Adnan \n");
 printf("And I am %d year old year",age);
   //Hehe
-printf(y);  
+printf("%d",y);  
   return 0 ;
 }

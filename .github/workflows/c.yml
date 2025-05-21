@@ -1,0 +1,36 @@
+name: Test C Files
+
+on:
+  push:
+    paths:
+      - '**.c'
+      - '**.h'
+  pull_request:
+    paths:
+      - '**.c'
+      - '**.h'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GCC
+        run: sudo apt-get update && sudo apt-get install -y gcc
+
+      - name: Find and compile all C files
+        run: |
+          for file in $(find . -name '*.c'); do
+            exe="${file%.c}"
+            gcc "$file" -o "$exe" || exit 1
+            echo "Compiled $file -> $exe"
+          done
+
+      # Optional: Run executables (if each .c file can be run directly)
+      # - name: Run all executables
+      #   run: |
+      #     for exe in $(find . -type f -executable ! -name '*.c'); do
+      #       echo "Running
